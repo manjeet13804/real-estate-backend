@@ -9,10 +9,8 @@ const secret = "ESTATE"
 
 const app =  express()
 
-app.get("/", (req, res) => {
-    res.send("Ok");
-});
-
+app.use("/api/user",userRoutes)
+app.use("/api/property",propertyRoutes)
 
 
 
