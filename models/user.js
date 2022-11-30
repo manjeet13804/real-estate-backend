@@ -6,5 +6,5 @@ const mongoose = require('mongoose');
     password: {type: String,required:true}
  }, {timestamps : true})
 
-const userModel = mongoose.model("User", userSchema);
+const userModel = mongoose.model("Users", userSchema);
 module.exports = userModel;
