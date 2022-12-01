@@ -26,7 +26,7 @@ const mongoose = require('mongoose');
    facing: { type: Array },
 
    name: { type: Array },
-   contact: { required: true, type: String },
+   mobile: { required: true, type: String },
    postedBy: { type: Array },
    saleType: { type: Array },
    featuredPackage: { type: Array },

@@ -3,13 +3,16 @@ const router = require('express').Router();
 const propertyModel = require('../models/property')
 const userModel = require('../models/user')
 var jwt = require('jsonwebtoken');
-let secret = "ESTATE"
+const dotenv=require("dotenv");
+dotenv.config()
 
 router.use('/', (req, res, next) => {
+   // console.log(req.body)
     if (req.headers.authorization) {
-        const token = req.headers.authorization.split("test")[1];
+
+        const token = req.headers.authorization.split("ESTATE ")[1];
         try {
-            jwt.verify(token, secret, async function (err, decoded) {
+            jwt.verify(token, process.env.secret, async function (err, decoded) {
                 if (err) {
                     res.status(400).json(err.message)
                 }
@@ -61,6 +64,7 @@ router.post('/', async (req, res) => {
     const PPDId = "PPD" + parseInt(Math.random() * 10000)
     const Views = parseInt(Math.random() * 10)
     const DaysLeft = parseInt(Math.random() * 10)
+    console.log(req.body)
     try {
         const asset = await propertyModel.create({
             //mention as per the schema which is to be created
