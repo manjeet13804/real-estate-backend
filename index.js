@@ -5,6 +5,7 @@ const userRoutes = require("./routes/user");
 const propertyRoutes=require("./routes/property")
 const connect = require("./connection/connect");
 var jwt = require('jsonwebtoken');
+const cors=require("cors")
 const secret = "ESTATE"
 
 const app =  express()
