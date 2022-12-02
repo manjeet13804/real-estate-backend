@@ -7,6 +7,12 @@ const User = require("../models/user");
 const bcrypt = require('bcrypt');
 var jwt = require('jsonwebtoken');
 const secret = "ESTATE";
+const cors=require("cors")
+
+
+router.use(cors({
+    origin:"*"
+}))
 
 router.use(bodyParser.json());
 
@@ -118,6 +124,7 @@ router.get("/login", body('email').isEmail(), async (req, res) => {
         })
     }
 });
+
 
 module.exports = router;
 

@@ -18,3 +18,5 @@ app.use(cors({
 }))
 
 app.listen(5000, () => console.log("The server is up at 5000 port"));
+
+// Access-Control-Allow-Origin
