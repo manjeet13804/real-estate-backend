@@ -6,6 +6,13 @@ var jwt = require('jsonwebtoken');
 const dotenv=require("dotenv");
 dotenv.config()
 
+const cors=require("cors")
+
+
+router.use(cors({
+    origin:"*"
+}))
+
 router.use('/', (req, res, next) => {
    // console.log(req.body)
     if (req.headers.authorization) {
