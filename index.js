@@ -3,6 +3,7 @@ const express = require("express");
 const mongoose = require('mongoose');
 const userRoutes = require("./routes/user");
 const propertyRoutes=require("./routes/property")
+// const assetsRoutes = require("./routes/assets")
 const connect = require("./connection/connect");
 var jwt = require('jsonwebtoken');
 const cors=require("cors")
@@ -12,6 +13,7 @@ const app =  express()
 
 app.use("/api/user",userRoutes)
 app.use("/api/property",propertyRoutes)
+// app.use("/api/property",assetsRoutes)
 
 app.use(cors({
     origin:"*"

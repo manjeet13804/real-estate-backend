@@ -46,7 +46,8 @@ const mongoose = require('mongoose');
    
    image: { type: String },
    status: {type: String, default: "Unsold"},
-   users : {type :mongoose.Schema.Types.ObjectId, ref: "Users"}
+
+   user : {type :mongoose.Schema.Types.ObjectId, ref: "Users"}
  })
 const addPropertyModel = mongoose.model("Property", addPropertySchema);
 module.exports = addPropertyModel;
