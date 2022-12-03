@@ -1,13 +1,18 @@
 
-const router = require('express').Router();
+const express = require("express");
+const bodyParser = require("body-parser");
+const router = express.Router();
 const propertyModel = require('../models/property')
 const userModel = require('../models/user')
 var jwt = require('jsonwebtoken');
-const dotenv=require("dotenv");
-dotenv.config()
+// const dotenv=require("dotenv");
+// dotenv.config()
+secret = "ESTATE"
 
 const cors=require("cors")
 
+
+router.use(bodyParser.json())
 
 router.use(cors({
     origin:"*"
@@ -19,12 +24,15 @@ router.use('/', (req, res, next) => {
 
         const token = req.headers.authorization.split("ESTATE ")[1];
         try {
-            jwt.verify(token, process.env.secret, async function (err, decoded) {
+            jwt.verify(token,secret , async function (err, decoded) {    //process.env.secret // starting time, decoded object id,
                 if (err) {
                     res.status(400).json(err.message)
                 }
-                const user = await userModel.findOne({ _id: decoded.data })
-                req.user = user._id;
+                // console.log(decoded)
+                const user = await userModel.findOne({ _id: decoded.data });
+                // console.log(user)
+                req.user = user.email;
+                // console.log(req.user)
                 next();
             });
         }
@@ -67,16 +75,18 @@ router.put('/:id', async (req, res) => {
         })
     }
 })
+
+
 router.post('/', async (req, res) => {
     const PPDId = "PPD" + parseInt(Math.random() * 10000)
     const Views = parseInt(Math.random() * 10)
     const DaysLeft = parseInt(Math.random() * 10)
-    console.log(req.body)
+    // console.log(req.body)
     try {
         const asset = await propertyModel.create({
-            //mention as per the schema which is to be created
+            // mention as per the schema which is to be created
 
-            propertyType: req.body.propertyType,
+             propertyType: req.body.propertyType,
             negotable: req.body.negotable,
             price: req.body.price,
             ownership: req.body.ownership,
@@ -84,9 +94,9 @@ router.post('/', async (req, res) => {
             propertyApproved: req.body.propertyApproved,
             propertyDescription: req.body.propertyDescription,
             bankLoan: req.body.bankLoan,
-            length: req.body.length,
-            breath: req.body.breath,
-            totalArea: req.body.totalArea,
+             length: req.body.length,
+             breath: req.body.breath,
+             totalArea: req.body.totalArea,
             areaUnit: req.body.areaUnit,
             noOfBHK: req.body.noOfBHK,
             noOfFloor: req.body.noOfFloor,
@@ -98,12 +108,12 @@ router.post('/', async (req, res) => {
             electricity: req.body.electricity,
             facing: req.body.facing,
             name: req.body.name,
-            mobile: req.body.mobile,
+           mobile: req.body.mobile,
             postedBy: req.body.postedBy,
             saleType: req.body.saleType,
             featuredPackage: req.body.featuredPackage,
             ppdPackage: req.body.ppdPackage,
-            email: req.body.email,
+             email: req.body.email,
             city: req.body.city,
             area: req.body.area,
             pincode: req.body.pincode,
@@ -118,7 +128,7 @@ router.post('/', async (req, res) => {
         })
         res.status(200).json({
             message: "success",
-            asset
+            // asset
         })
     } catch (e) {
         console.log(e.message)
@@ -128,5 +138,32 @@ router.post('/', async (req, res) => {
         })
     }
 })
+
+
+// router.post("/", async (req, res) => {
+//     console.log(req.body)
+//     try{
+
+   
+//         // const posts = await propertyModel.create({
+//             // title: req.body.title,
+//             // body: req.body.body,
+//             // user: req.user
+//         // });
+//         res.json({
+//             status: "Sucess",
+//             // posts
+    
+//         })
+
+//     }catch(e){
+//         res.status(500).json({
+//             status: "Failed",
+//             message : e.message
+    
+//         })
+//     }
+
+// })
 
 module.exports = router;

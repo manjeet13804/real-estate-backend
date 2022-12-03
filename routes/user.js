@@ -19,7 +19,7 @@ router.use(bodyParser.json());
 router.post("/signup", body('email').isEmail(), 
     body("password").isLength({ min: 6, max: 16 }),
      async (req, res) => {
-
+console.log(req.body)
         try {
             // Finds the validation errors in this request and wraps them in an object with handy functions
             const errors = validationResult(req);
@@ -127,6 +127,8 @@ router.post("/login", body('email').isEmail(), async (req, res) => {
 
 
 module.exports = router;
+
+
 
 
 
