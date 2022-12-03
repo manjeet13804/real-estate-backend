@@ -67,7 +67,7 @@ router.post("/signup", body('email').isEmail(),
         }
     });
 
-router.get("/login", body('email').isEmail(), async (req, res) => {
+router.post("/login", body('email').isEmail(), async (req, res) => {
 
     try {
         // Finds the validation errors in this request and wraps them in an object with handy functions
