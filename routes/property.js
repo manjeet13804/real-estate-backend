@@ -19,7 +19,8 @@ router.use(cors({
 }))
 
 router.use('/', (req, res, next) => {
-   // console.log(req.body)
+//    console.log(req.body)
+//    console.log(req.headers.authorization)
     if (req.headers.authorization) {
 
         const token = req.headers.authorization.split("ESTATE ")[1];
@@ -28,10 +29,10 @@ router.use('/', (req, res, next) => {
                 if (err) {
                     res.status(400).json(err.message)
                 }
-                // console.log(decoded)
+                console.log(decoded)
                 const user = await userModel.findOne({ _id: decoded.data });
                 // console.log(user)
-                req.user = user.email;
+                req.user = user.email;            // which user has posted data.  ..............
                 // console.log(req.user)
                 next();
             });
@@ -48,7 +49,7 @@ router.use('/', (req, res, next) => {
 
 router.get('/', async (req, res) => {
     try {
-        const posts = await propertyModel.find();
+        const posts = await propertyModel.findAll({userid:req.user});  // left = userid from schema right= req.user from front end server 
         res.status(200).json(posts);
         console.log(posts)
     } catch (e) {
@@ -81,7 +82,7 @@ router.post('/', async (req, res) => {
     const PPDId = "PPD" + parseInt(Math.random() * 10000)
     const Views = parseInt(Math.random() * 10)
     const DaysLeft = parseInt(Math.random() * 10)
-    // console.log(req.body)
+    console.log(req.body)
     try {
         const asset = await propertyModel.create({
             // mention as per the schema which is to be created
@@ -124,7 +125,8 @@ router.post('/', async (req, res) => {
             PPDId: PPDId,
             Views: Views,
             DaysLeft: DaysLeft,
-            status: "Unsold"
+            status: "Unsold",
+            userid: req.user           // user id is req.user and req.user is emailid which is set in line 35.
         })
         res.status(200).json({
             message: "success",

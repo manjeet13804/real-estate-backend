@@ -46,8 +46,9 @@ const mongoose = require('mongoose');
    
    image: { type: String },
    status: {type: String, default: "Unsold"},
+userid:{type:String},
 
-   user : {type :mongoose.Schema.Types.ObjectId, ref: "Users"}
- })
+   user : {type :mongoose.Schema.Types.ObjectId, ref: "Users"}  // user - that one user that we have generated using email by this user we r fetching the record
+ })                                                            //Users - collection 
 const addPropertyModel = mongoose.model("Property", addPropertySchema);
 module.exports = addPropertyModel;
