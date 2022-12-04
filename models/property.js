@@ -13,7 +13,7 @@ const mongoose = require('mongoose');
    bankLoan: { type: String },
    length: { required: true, type: String },
    breath: { required: true, type: String },
-   totalArea: { required: true, type: String },
+   totalArea: { required: true, type: Number },
    areaUnit: { type: String },
    noOfBHK: { type: String },
    noOfFloor: { type: String },
