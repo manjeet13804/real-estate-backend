@@ -49,7 +49,7 @@ router.use('/', (req, res, next) => {
 
 router.get('/', async (req, res) => {
     try {
-        const posts = await propertyModel.findAll({userid:req.user});  // left = userid from schema right= req.user from front end server 
+        const posts = await propertyModel.find({userid:req.user});  // left = userid from schema right= req.user from front end server 
         res.status(200).json(posts);
         console.log(posts)
     } catch (e) {
@@ -64,18 +64,18 @@ router.get('/', async (req, res) => {
 
 
 
-router.put('/:id', async (req, res) => {
-    try {
-        await propertyModel.findByIdAndUpdate(req.params.id, req.body)
-        const posts = await propertyModel.findById(req.params.id);
-        res.status(200).json(posts);
-    } catch (e) {
-        console.log(e.message)
-        res.status(400).json({
-            message: e.message
-        })
-    }
-})
+// router.put('/:id', async (req, res) => {
+//     try {
+//         await propertyModel.findByIdAndUpdate(req.params.id, req.body)
+//         const posts = await propertyModel.findById(req.params.id);
+//         res.status(200).json(posts);
+//     } catch (e) {
+//         console.log(e.message)
+//         res.status(400).json({
+//             message: e.message
+//         })
+//     }
+// })
 
 
 router.post('/', async (req, res) => {
